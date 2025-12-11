@@ -1,0 +1,20 @@
+Edit online	
+@startuml
+left to right direction
+actor "Food Critic" as fc
+actor "Customer" as customer
+fc --|> customer
+rectangle Restaurant {
+  usecase "Eat Food" as UC1
+  usecase "Pay for Food" as UC2
+  usecase "Drink" as UC3
+  usecase "Check Funds" as UC4
+  usecase "Enjoy Food" as UC5
+  UC2 .> UC4 : include
+  UC5 ..> UC1 : extends
+  UC3 --|> UC2 : extends
+}
+customer --> UC1
+customer --> UC2
+fc --> UC3
+@enduml

@@ -1,0 +1,76 @@
+
+Edit online	
+@startuml Shop
+
+interface GUI {
+  +start(): void
+}
+
+interface Product {
+  +getName(): string
+  +getPrice(): number
+}
+
+class CommandLineGUI {
+  -products: Products
+  +CommandLineGUI(products: Products)
+  +start(): void
+}
+
+class GraficGUI {
+  -products: Products
+  +GraficGUI(products: Products)
+  +start(): void
+}
+
+class Products {
+  -products: Product[]
+  +Products(products: Product[])
+  +getProducts(): Product[]
+}
+
+class Handy {
+  -model: string
+  -price: number
+  -color: string
+  -nic: string
+  +Handy(model, price, color, nic)
+  +getName(): string
+  +getModel(): string
+  +getPrice(): number
+  +getColor(): string
+  +getNic(): string
+}
+
+class Glasses {
+  -strength: number
+  -preis: number
+  -name: string
+  +Glasses(strength, preis, name)
+  +getPrice(): number
+  +getPreis(): number
+  +getName(): string
+  +getStrength(): number
+}
+
+class Car {
+  -name: string
+  -price: number
+  +Car(name, price)
+  +getName(): string
+  +getPrice(): number
+  +drive(): void
+}
+
+CommandLineGUI ..|> GUI
+GraficGUI ..|> GUI
+
+Handy ..|> Product
+Glasses ..|> Product
+Car ..|> Product
+
+CommandLineGUI --> Products
+GraficGUI --> Products
+Products --> Product
+
+@enduml
