@@ -1,0 +1,60 @@
+@startuml Vehicle Shop
+
+interface Vehicle {
+  +drive(): void
+  +doBreak(): void
+  +getInfo(): string
+  +getPrice(): number
+}
+
+class Car {
+  -brand: string
+  -model: string
+  -price: number
+  +Car(brand, model, price)
+  +drive(): void
+  +doBreak(): void
+  +getInfo(): string
+  +getPrice(): number
+}
+
+class SuperCar {
+  -boostMode: boolean
+  +SuperCar(brand, model, price)
+  +setBoostMode(enabled: boolean): void
+}
+
+class Bike {
+  -brand: string
+  -model: string
+  -price: number
+  +Bike(brand, model, price)
+  +drive(): void
+  +doBreak(): void
+  +getInfo(): string
+  +getPrice(): number
+}
+
+class Shop {
+  -vehicles: Vehicle[]
+  +Shop(vehicles: Vehicle[])
+  +addVehicle(vehicle: Vehicle): void
+  +getVehicles(): Vehicle[]
+  +sellVehicle(vehicle: Vehicle): void
+}
+
+class GUI {
+  -shop: Shop
+  +GUI(shop: Shop)
+  +start(): void
+  -showAllVehicles(): void
+  -addToCart(): void
+}
+
+Car ..|> Vehicle
+SuperCar --|> Car
+Bike ..|> Vehicle
+Shop "1" -- "*" Vehicle : has
+GUI --> Shop
+
+@enduml
