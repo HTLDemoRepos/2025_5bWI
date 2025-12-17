@@ -1,0 +1,42 @@
+@startuml Ordering Food Activity Diagram
+
+start
+:Choose Restaurant;
+:Open Menu;
+
+if (Menu Available?) then (yes)
+  :Browse Menu Items;
+  fork
+    :Select Appetizer;
+  fork again
+    :Select Main Course;
+  fork again
+    :Select Dessert;
+  end fork
+  
+  :Review Cart;
+  
+  if (Confirm Order?) then (yes)
+    :Enter Delivery Address;
+    :Enter Payment Information;
+    :Place Order;
+    :Order Confirmed;
+    stop
+  else (no)
+    :Clear Cart;
+    :Back to Menu;
+    if (Continue Shopping?) then (yes)
+      stop
+    else (no)
+      :Cancel Order;
+      stop
+    endif
+  endif
+else (no)
+  :Restaurant Closed;
+  :Choose Another Restaurant;
+  :Choose Restaurant;
+  :Open Menu;
+endif
+
+@enduml

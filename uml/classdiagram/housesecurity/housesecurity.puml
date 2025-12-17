@@ -1,0 +1,72 @@
+@startuml House Security System
+
+interface Lockable {
+  +lock(): void
+  +unlock(): void
+  +isLocked(): boolean
+}
+
+interface Securable {
+  +isSecured(): boolean
+  +getSecurityStatus(): string
+}
+
+class Door {
+  -locked: boolean
+  +Door()
+  +lock(): void
+  +unlock(): void
+  +isLocked(): boolean
+}
+
+class Window {
+  -locked: boolean
+  +Window()
+  +lock(): void
+  +unlock(): void
+  +isLocked(): boolean
+}
+
+class Car {
+  -doors: Door[]
+  +Car(numberOfDoors: number)
+  +isSecured(): boolean
+  +getSecurityStatus(): string
+  +lockAllDoors(): void
+  +unlockAllDoors(): void
+  +getDoors(): Door[]
+}
+
+class House {
+  -doors: Door[]
+  -windows: Window[]
+  +House(numberOfDoors: number, numberOfWindows: number)
+  +isSecured(): boolean
+  +getSecurityStatus(): string
+  +lockAll(): void
+  +unlockAll(): void
+  +getDoors(): Door[]
+  +getWindows(): Window[]
+}
+
+class SecurityService {
+  -securableObjects: Securable[]
+  +SecurityService()
+  +addObject(object: Securable): void
+  +removeObject(object: Securable): void
+  +checkAllSecurity(): void
+  +getSecurityReport(): string
+}
+
+Door ..|> Lockable
+Window ..|> Lockable
+Car ..|> Securable
+House ..|> Securable
+
+Car "1" -- "n" Door : has
+House "1" -- "n" Door : has
+House "1" -- "n" Window : has
+
+SecurityService --> Securable
+
+@enduml
